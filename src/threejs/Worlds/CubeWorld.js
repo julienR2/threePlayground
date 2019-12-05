@@ -1,12 +1,11 @@
-import Application from '../application'
-import { Lights } from '../Managers'
+import { World, Lights } from '../Managers'
 import Cube from '../Components/Cube'
 
 export default class CubeWorld {
   constructor(container) {
-    this.application = new Application({ container })
+    this.world = new World({ container })
 
-    this.application.scene.add(...Lights())
-    this.application.scene.add(Cube())
+    this.world.scene.add(...Lights())
+    this.world.scene.add(Cube())
   }
 }

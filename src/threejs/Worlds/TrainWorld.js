@@ -1,12 +1,11 @@
-import Application from '../application'
-import { Lights } from '../Managers'
+import { World, Lights } from '../Managers'
 import Train from '../Components/Train'
 
 export default class TrainWorld {
   constructor(container) {
-    this.application = new Application({ container })
+    this.world = new World({ container })
 
-    this.application.scene.add(...Lights())
-    this.application.scene.add(Train())
+    this.world.scene.add(...Lights())
+    this.world.scene.add(Train())
   }
 }

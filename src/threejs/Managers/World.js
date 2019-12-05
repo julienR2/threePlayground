@@ -1,6 +1,6 @@
-import { Scene, Camera, Controls, Renderer } from './Managers'
+import { Scene, Camera, Controls, Renderer } from './'
 
-export default class Application {
+export default class World {
   constructor({
     container,
     scene = Scene,
@@ -79,5 +79,7 @@ export default class Application {
         for (const material of object.material) this.cleanMaterial(material)
       }
     })
+
+    this.scene.dispose()
   }
 }
