@@ -2,12 +2,12 @@ import React from 'react'
 
 const ThreeContainer = ({ world }) => {
   const containerRef = React.useRef()
-  const three = React.useRef()
+  const worldRef = React.useRef()
 
   React.useEffect(() => {
-    three.current && three.current.world.destroy()
+    worldRef.current && worldRef.current.destroy()
 
-    three.current = new world(containerRef.current)
+    worldRef.current = world(containerRef.current)
   }, [world])
 
   return <div ref={containerRef} style={styles.container} />

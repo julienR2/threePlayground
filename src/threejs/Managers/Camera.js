@@ -3,7 +3,7 @@ import { PerspectiveCamera } from 'three'
 const Camera = container => {
   const fov = 35
   const aspect = container.clientWidth / container.clientHeight
-  const near = 0.1
+  const near = 1
   const far = 100
 
   const camera = new PerspectiveCamera(fov, aspect, near, far)

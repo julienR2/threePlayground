@@ -30,7 +30,6 @@ export default class World {
   }
 
   onWindowResize() {
-    console.log('You resized the browser window!')
     const { clientWidth, clientHeight } = this.container
 
     this.camera.aspect = clientWidth / clientHeight
