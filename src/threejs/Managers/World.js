@@ -1,18 +1,14 @@
+import { Clock } from 'three'
 import { Scene, Camera, Controls, Renderer } from './'
 
 export default class World {
-  constructor({
-    container,
-    scene = Scene,
-    camera = Camera,
-    controls = Controls,
-    renderer = Renderer,
-  }) {
+  constructor({ container, scene, camera, controls, renderer }) {
     this.container = container
-    this.scene = scene()
-    this.camera = camera(this.container)
-    this.controls = controls(this.camera, this.container)
-    this.renderer = renderer(this.container)
+    this.scene = scene || Scene()
+    this.camera = camera || Camera(this.container)
+    this.controls = controls || Controls(this.camera, this.container)
+    this.renderer = renderer || Renderer(this.container)
+    this.clock = new Clock()
 
     this.animate = this.animate.bind(this)
     this.update = this.update.bind(this)
@@ -45,7 +41,14 @@ export default class World {
     })
   }
 
-  update() {}
+  onUpdate(fn) {
+    this.fnUpdate = fn
+  }
+
+  update(fn) {
+    const delta = this.clock.getDelta()
+    this.fnUpdate(delta)
+  }
 
   render() {
     this.renderer.render(this.scene, this.camera)
