@@ -8,6 +8,58 @@ Universe Explorer
 
 Web app to explorer the galaxies and universe. You can also see existing sateliites and launch starships.
 
+## Objects & Information
+
+Planet:
+- Current position
+- Mass, shape, volume
+- Orbit curve
+- Orbit speed
+- Rotation speed
+- Orbit date time reference position
++ planet information
++ starship information
+
+Spaceship / satellite: 
+ - Current position
+ - Acceleration
+ - Speed
+ - Mass, volume
+
+Plan de vol spaceship:
+- Date / début lancement
+- Emplacement lancement
+- Phases de vol:
+    - Décollage
+    - Mise en orbite
+    - Changement de trajectoire
+
+
+## Key options
+- Camera select object to follow 
+- Display / Hide planet/spaceship orbit
+- Display planet/spaceship information
+- Date / Time speed
+
+## Solar System representation
+- The sun
+- Earth (+ lune?, iss?)
+- Mars
+- Comète philae
+
+## Lancement de la sonde Rosetta
+1 - Launch: 2 mars 2004
+2 - first earth gait assis : 4 mars 2005
+3 - mars gravity assist : 25 feb 2007
+4 - 13 nov 2007 : earth gravity assist
+
+Trajectory corrections
+
+## Data & APIs
+- Planet information
+- Spaceship onformation
+
+
 ## Available Scripts
 
 In the project directory, you can run:
