@@ -8,6 +8,14 @@ Universe Explorer
 
 Web app to explorer the galaxies and universe. You can also see existing sateliites and launch starships.
 
+1 - Functional Goals
+
+2 - Evolvability Goals
+
+3 - Usability Goals
+
+
+
 ## Objects & Information
 
 Planet:
@@ -61,13 +69,15 @@ Trajectory corrections
 - https://astronomy.stackexchange.com/questions/39/how-to-calculate-the-movement-of-the-object-passing-near-other-object-in-space
 
 
-
-
-
 ## Data & APIs
 - Planet information
-- Spaceship onformation
+- Spaceship information
 
+- https://data.nasa.gov/browse
+- https://open.nasa.gov/open-data/
+- http://open.esa.int/
+- https://code.nasa.gov/#/
+- https://ti.arc.nasa.gov/opensource/projects/mission-simulation-toolkit/
 
 ## Available Scripts
 
