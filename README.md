@@ -1,5 +1,13 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Project Title
+
+Universe Explorer
+
+## Project Description
+
+Web app to explorer the galaxies and universe. You can also see existing sateliites and launch starships.
+
 ## Available Scripts
 
 In the project directory, you can run:
