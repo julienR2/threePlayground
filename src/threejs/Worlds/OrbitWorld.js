@@ -4,13 +4,25 @@ import Ellipse from '../Components/Ellipse'
 
 const OrbitWorld = container => {
   const world = new World({ container })
-  const sphere = Sphere()
-  world.scene.add(...Lights(), sphere, Ellipse())
+  const ellipse = Ellipse()
+  const moon = Sphere()
+  // Set moon position in the Scene
+  moon.position.x = 10
+
+  world.scene.add(...Lights(), moon, ellipse)
+
+  let theta = 0
+  const dTheta = (2 * Math.PI) / 1000
 
   world.onUpdate(delta => {
-    // sphere.position.x = sphere.position.x + 0.1
-    // sphere.position.y = Math.sqrt(4 * -Math.pow())
-    // sphere.position.z = sphere.position.z + 0.1
+    // Update moon position with the parametric equation of a circle
+    // ToDo: use delta instead for a better rendering
+    theta += dTheta // To adjust the step
+    moon.position.x = 10 * Math.cos(theta)
+    moon.position.y = 10 * Math.sin(theta)
+
+    // Others updates of Object
+    // ...
   })
 
   return world

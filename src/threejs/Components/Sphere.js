@@ -2,13 +2,13 @@ import { SphereBufferGeometry, MeshStandardMaterial, Mesh } from 'three'
 
 import { colors } from '../constants'
 
-const Cube = () => {
-  const geometry = new SphereBufferGeometry(1, 20, 20)
-  const material = new MeshStandardMaterial({ color: colors.purple })
+const Sphere = ({ geo = [1, 20, 20], mat = { color: colors.purple } } = {}) => {
+  const geometry = new SphereBufferGeometry(...geo)
+  const material = new MeshStandardMaterial(mat)
 
   const mesh = new Mesh(geometry, material)
 
   return mesh
 }
 
-export default Cube
+export default Sphere
