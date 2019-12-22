@@ -45,9 +45,10 @@ Plan de vol spaceship:
 
 ## Key options
 - Camera select object to follow 
-- Display / Hide planet/spaceship orbit
+- Display / Hide planet/spaceship orbit/trajectory
 - Display planet/spaceship information
 - Date / Time speed
+- Show/Hide gravitationnal forces
 
 ## Solar System representation
 - The sun
@@ -78,6 +79,11 @@ Trajectory corrections
 - http://open.esa.int/
 - https://code.nasa.gov/#/
 - https://ti.arc.nasa.gov/opensource/projects/mission-simulation-toolkit/
+
+## Examples
+- https://eyes.jpl.nasa.gov/eyes-on-the-solar-system.html
+- http://jeromeetienne.github.io/flying-spaceship-minigame/slides/#29
+- https://hub.packtpub.com/writing-3d-space-rail-shooter-threejs-part-2/
 
 ## Available Scripts
 
