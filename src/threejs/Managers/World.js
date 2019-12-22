@@ -47,7 +47,8 @@ export default class World {
 
   update(fn) {
     const delta = this.clock.getDelta()
-    this.fnUpdate(delta)
+
+    this.fnUpdate && this.fnUpdate(delta)
   }
 
   render() {
