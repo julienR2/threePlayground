@@ -55,6 +55,15 @@ Plan de vol spaceship:
 
 Trajectory corrections
 
+## Computations
+- https://keisan.casio.com/exec/system/1224665242
+- http://www.calctool.org/CALC/phys/astronomy/planet_orbit
+- https://astronomy.stackexchange.com/questions/39/how-to-calculate-the-movement-of-the-object-passing-near-other-object-in-space
+
+
+
+
+
 ## Data & APIs
 - Planet information
 - Spaceship onformation
