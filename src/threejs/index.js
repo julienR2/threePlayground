@@ -1,3 +1,6 @@
-import OrbitWorld from './Worlds/OrbitWorld'
+import TrainWorld from './Worlds/TrainWorld'
+import CubeWorld from './Worlds/CubeWorld'
+import BirdsWorld from './Worlds/BirdsWorld'
+import SpaceXWorld from './Worlds/SpaceXWorld'
 
-export { OrbitWorld }
+export { SpaceXWorld, TrainWorld, CubeWorld, BirdsWorld }

@@ -1,13 +1,21 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 
 const Sidebar = ({ worlds }) => {
+  const { world } = useParams()
+  const orderedWorlds = [world, ...worlds.filter(name => name !== world).sort()]
+
   return (
     <div style={styles.sidebar}>
-      {worlds.map(name => (
-        <Link key={name} to={`/${name}`} style={styles.link}>
+      {orderedWorlds.map(name => (
+        <NavLink
+          key={name}
+          to={`/${name}`}
+          style={styles.link}
+          activeStyle={styles.activeLink}
+        >
           {name}
-        </Link>
+        </NavLink>
       ))}
     </div>
   )
@@ -26,6 +34,11 @@ const styles = {
   link: {
     color: '#ffffff',
     marginBottom: 12,
+  },
+  activeLink: {
+    marginBottom: 36,
+    textDecoration: 'none',
+    fontWeight: 'bold',
   },
 }
 

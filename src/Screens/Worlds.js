@@ -7,7 +7,7 @@ import * as worlds from '../threejs'
 import ThreeContainer from '../Components/ThreeContainer'
 
 const Worlds = () => {
-  const { world = Object.keys(worlds)[0] } = useParams()
+  const { world } = useParams()
 
   return (
     <div style={styles.wrapper}>
