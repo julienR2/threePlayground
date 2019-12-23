@@ -8,7 +8,7 @@ const Camera = container => {
 
   const camera = new PerspectiveCamera(fov, aspect, near, far)
 
-  camera.position.set(0, -75, 50)
+  camera.position.set(0, -75, 25)
 
   return camera
 }

@@ -13,10 +13,15 @@ const OrbitWorld = container => {
   // moon.position.x = 10
   sun.position.x = 0
   sun.position.y = 0
-
+  // 
+  // Add Stars
+  // ToDo: Change add lights to add stars
+  // world.scene.add(sun)
   world.scene.add(...Lights())
+  // 
   // Add planets
-  world.scene.add(earth, sun, mars)
+  world.scene.add(earth, mars)
+  // 
   // Add Interstellar objects
   world.scene.add(philae)
   // 
@@ -75,8 +80,10 @@ const OrbitWorld = container => {
     // Philae position
     // ToDo: fix orbit curve
     theta_philae += rotation_speed_philae // To adjust the step
-    philae.position.x = (distance_sun_earth + distance_sun_mars) * Math.cos(theta_philae)
-    philae.position.y = (distance_sun_earth + distance_sun_mars) * 8 * Math.sin(theta_philae)
+    philae.position.x = (distance_sun_earth + distance_sun_mars) / 2 * Math.cos(theta_philae)
+    philae.position.y = (((distance_sun_earth + distance_sun_mars) / 2 * 8) - (distance_sun_earth + distance_sun_mars) / 2)
+      + (distance_sun_earth + distance_sun_mars) / 2 * 8
+      * Math.sin(theta_philae)
 
   })
 
