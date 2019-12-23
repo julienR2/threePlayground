@@ -8,7 +8,7 @@ export default {
     sun: {
         star_code: 'sun',
         ref: 'milky_way_center',
-        distance_to_ref: null,
+        distance_to_ref: null, // 2,45979e+17 kms
         diameter: 695508,
         axial_tilt: 7.25,
         orbit_revolution_length: 83950000000
