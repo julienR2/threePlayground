@@ -1,6 +1,7 @@
 import { World, Lights } from '../../Managers'
 import Ellipse from '../../Components/Ellipse'
 import Planet from '../../Components/SpaceX/Planet'
+import Orbit from '../../Components/SpaceX/Orbit'
 
 import planets from './planets'
 
@@ -11,8 +12,14 @@ const OrbitWorld = container => {
   world.scene.add(...Lights(), earth_sun_orbit)
 
   Object.values(planets).forEach(planet => {
-    const newPlanet = Planet({ data: planet })
+    // console.log(planet)
+    // const newOrbit = Orbit({ data: planet })
+    const newOrbit = Ellipse()
+    world.scene.add(newOrbit)
+  })
 
+  Object.values(planets).forEach(planet => {
+    const newPlanet = Planet({ data: planet, radius: planet.diameter / 2 / 10000 })
     world.addObject(newPlanet)
   })
 
@@ -24,7 +31,7 @@ const OrbitWorld = container => {
   //
   //
 
-  world.onUpdate(delta => {})
+  world.onUpdate(delta => { })
 
   return world
 }
