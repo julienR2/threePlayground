@@ -4,15 +4,15 @@ const Ellipse = () => {
   const curve = new EllipseCurve(
     0,
     0, // ax, aY
-    10,
-    10, // xRadius, yRadius
+    20,
+    20, // xRadius, yRadius
     0,
     2 * Math.PI, // aStartAngle, aEndAngle
     false, // aClockwise
     0 // aRotation
   )
 
-  const points = curve.getPoints(50)
+  const points = curve.getPoints(250)
   const geometry = new BufferGeometry().setFromPoints(points)
 
   const material = new LineBasicMaterial({ color: 0xff0000 })

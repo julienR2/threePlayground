@@ -9,18 +9,22 @@ const OrbitWorld = container => {
   const earth = Sphere()
   const mars = Sphere()
   const philae = Sphere()
-  // Orbits
-  const earth_sun_orbit = Ellipse()
-  const mars_sun_orbit = Ellipse()
   // Set moon position in the Scene
   // moon.position.x = 10
   sun.position.x = 0
   sun.position.y = 0
 
   world.scene.add(...Lights())
-  world.scene.add(earth, sun, mars, earth_sun_orbit)
+  // Add planets
+  world.scene.add(earth, sun, mars)
+  // Add Interstellar objects
   world.scene.add(philae)
-
+  // 
+  // 
+  // PLANET INFORMATION
+  // Distance
+  var distance_sun_earth = 150 / 10 // millions de km
+  var distance_sun_mars = 228 / 10 // millions de km
   // 
   let theta_earth = 0
   let theta_mars = 0
@@ -29,10 +33,25 @@ const OrbitWorld = container => {
   const rotation_speed_earth = (2 * Math.PI) / 365
   const rotation_speed_mars = (2 * Math.PI) / 687
   const rotation_speed_philae = (2 * Math.PI) / (365 * 6.5)
-
   // 
-  var distance_sun_earth = 150 / 10 // millions de km
-  var distance_sun_mars = 228 / 10 // millions de km
+  // 
+  // Orbits
+  const earth_sun_orbit = Ellipse()
+  const mars_sun_orbit = Ellipse()
+  // UPDATE ORBITS
+  // Set Earth circular orbit 
+  earth_sun_orbit.xRadius = distance_sun_earth
+  earth_sun_orbit.yRadius = distance_sun_earth
+  // Set Mars circular orbit 
+  mars_sun_orbit.xRadius = distance_sun_mars
+  mars_sun_orbit.yRadius = distance_sun_mars
+  // 
+  // ToDo: Orbit drawing not updating
+  // 
+  // Draw planet orbits
+  world.scene.add(earth_sun_orbit, mars_sun_orbit)
+  // 
+
 
   world.onUpdate(delta => {
     // Update moon position with the parametric equation of a circle
