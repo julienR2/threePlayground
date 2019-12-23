@@ -2,11 +2,17 @@ import { SphereBufferGeometry, MeshStandardMaterial, Mesh } from 'three'
 
 import { colors } from '../constants'
 
-const Sphere = ({ geo = [1, 20, 20], mat = { color: colors.purple } } = {}) => {
-  const geometry = new SphereBufferGeometry(...geo)
-  const material = new MeshStandardMaterial(mat)
+const Sphere = ({
+  radius = 1,
+  geometry = [1, 20, 20],
+  material = { color: colors.purple },
+} = {}) => {
+  const [r, ...geo] = geometry
 
-  const mesh = new Mesh(geometry, material)
+  const sphereGeometry = new SphereBufferGeometry(...[radius || r, ...geo])
+  const standardMaterial = new MeshStandardMaterial(material)
+
+  const mesh = new Mesh(sphereGeometry, standardMaterial)
 
   return mesh
 }

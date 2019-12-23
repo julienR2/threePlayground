@@ -9,6 +9,7 @@ export default class World {
     this.controls = controls || Controls(this.camera, this.container)
     this.renderer = renderer || Renderer(this.container)
     this.clock = new Clock()
+    this.objects = []
 
     this.animate = this.animate.bind(this)
     this.update = this.update.bind(this)
@@ -23,6 +24,13 @@ export default class World {
   init() {
     this.container.appendChild(this.renderer.domElement)
     window.addEventListener('resize', this.onWindowResize)
+  }
+
+  addObject(objects) {
+    const objs = Array.isArray(objects) ? objects : [objects]
+    this.objects.push(...objs)
+
+    this.scene.add(...objs.map(({ mesh }) => mesh))
   }
 
   onWindowResize() {
@@ -47,6 +55,7 @@ export default class World {
 
   update(fn) {
     const delta = this.clock.getDelta()
+    this.objects.forEach(object => object.update(delta))
 
     this.fnUpdate && this.fnUpdate(delta)
   }

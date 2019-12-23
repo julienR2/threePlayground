@@ -9,6 +9,8 @@ import ThreeContainer from '../Components/ThreeContainer'
 const Worlds = () => {
   const { world } = useParams()
 
+  if (!worlds[world]) return
+
   return (
     <div style={styles.wrapper}>
       <Sidebar worlds={Object.keys(worlds)} />
