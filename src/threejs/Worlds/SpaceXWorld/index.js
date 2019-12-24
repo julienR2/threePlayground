@@ -1,10 +1,12 @@
 import { Color } from 'three'
 import { World, Lights } from '../../Managers'
 // import Ellipse from '../../Components/Ellipse'
+import Spaceship from '../../Components/SpaceX/Spaceship'
 import Planet from '../../Components/SpaceX/Planet'
 import Orbit from '../../Components/SpaceX/Orbit'
 
 import planets from './planets'
+import spaceships from './spaceships'
 
 const OrbitWorld = container => {
   const world = new World({ container })
@@ -28,6 +30,11 @@ const OrbitWorld = container => {
     world.addObject(newPlanet)
   })
 
+  Object.values(spaceships).forEach(spaceship => {
+    const newSpaceship = Spaceship({ world: world })
+    world.addObject(newSpaceship)
+  })
+
 
   // Set satellites rotation speeds (is approximation because some are non-linear)
   // const rotation_speed_philae =
@@ -37,7 +44,12 @@ const OrbitWorld = container => {
   //
   //
 
-  world.onUpdate(delta => { })
+  world.onUpdate(delta => {
+
+
+
+
+  })
 
   return world
 }

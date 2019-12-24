@@ -17,7 +17,7 @@ const Orbit = ({
   )
 
 
-  const points = curve.getPoints(150 * 10)
+  const points = curve.getPoints(radius * 10)
   const geometry = new BufferGeometry().setFromPoints(points)
 
   const material = new LineBasicMaterial({ color: "rgb(120, 120, 120)" })
