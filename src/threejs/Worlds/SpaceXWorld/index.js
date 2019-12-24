@@ -1,5 +1,6 @@
+import { Color } from 'three'
 import { World, Lights } from '../../Managers'
-import Ellipse from '../../Components/Ellipse'
+// import Ellipse from '../../Components/Ellipse'
 import Planet from '../../Components/SpaceX/Planet'
 import Orbit from '../../Components/SpaceX/Orbit'
 
@@ -7,14 +8,18 @@ import planets from './planets'
 
 const OrbitWorld = container => {
   const world = new World({ container })
-  const earth_sun_orbit = Ellipse()
+  // const earth_sun_orbit = Ellipse()
 
-  world.scene.add(...Lights(), earth_sun_orbit)
+  world.scene.add(...Lights())
+  // Set world background color
+  const background_color = new Color("rgb(20, 20, 20)");
+  world.scene.background = background_color
 
   Object.values(planets).forEach(planet => {
     // console.log(planet)
+    // console.log(planet)
     // const newOrbit = Orbit({ data: planet })
-    const newOrbit = Orbit()
+    const newOrbit = Orbit({ radius: planet.distance_to_ref })
     world.scene.add(newOrbit)
   })
 

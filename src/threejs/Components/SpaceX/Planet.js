@@ -9,11 +9,11 @@ const Planet = ({
   data,
 } = {}) => {
   const mesh = Sphere({ geometry, material, radius })
-  const x = 0
-  const y = (-1 * data.distance_to_ref) / 10
-  const z = 0
+  // const x = 0
+  // const y = (-1 * data.distance_to_ref) / 10
+  // const z = 0
 
-  mesh.position.set(x, y, z)
+  // mesh.position.set(x, y, z)
 
   const rotation = (2 * Math.PI) / (data.orbit_revolution * 3)
 
