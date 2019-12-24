@@ -15,15 +15,15 @@ const Planet = ({
 
   mesh.position.set(x, y, z)
 
-  const rotation = (2 * Math.PI) / data.orbit_revolution
+  const rotation = (2 * Math.PI) / (data.orbit_revolution * 3)
 
   let theta = 0
 
   const update = () => {
     theta = theta + rotation
 
-    mesh.position.x = (data.distance_to_ref * Math.cos(theta)) / 10
-    mesh.position.y = (data.distance_to_ref * Math.sin(theta)) / 10
+    mesh.position.x = (data.distance_to_ref * Math.cos(theta))
+    mesh.position.y = (data.distance_to_ref * Math.sin(theta))
   }
 
   return { mesh, update }

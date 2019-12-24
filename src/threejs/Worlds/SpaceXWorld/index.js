@@ -14,7 +14,7 @@ const OrbitWorld = container => {
   Object.values(planets).forEach(planet => {
     // console.log(planet)
     // const newOrbit = Orbit({ data: planet })
-    const newOrbit = Ellipse()
+    const newOrbit = Orbit()
     world.scene.add(newOrbit)
   })
 
@@ -22,6 +22,7 @@ const OrbitWorld = container => {
     const newPlanet = Planet({ data: planet, radius: planet.diameter / 2 / 10000 })
     world.addObject(newPlanet)
   })
+
 
   // Set satellites rotation speeds (is approximation because some are non-linear)
   // const rotation_speed_philae =

@@ -11,7 +11,8 @@ const Lights = scene => {
   // 
   var size_sun = 2
   var bulbLight, bulbMat
-  var bulbGeometry = new SphereBufferGeometry(1, 25, 25);
+  // Sun radius size :  695510 km
+  var bulbGeometry = new SphereBufferGeometry(347750 / 10000, 100, 100);
 
   // 
   bulbLight = new PointLight(0xffee88, 10, 0, 0);
