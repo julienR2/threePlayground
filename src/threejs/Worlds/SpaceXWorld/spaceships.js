@@ -94,7 +94,7 @@ export default {
     flight_plan: [
       {
         type: "takeoff",
-        datetime_start: 600,
+        datetime_start: 200,
       },
       {
         type: "rendezvous",
@@ -109,7 +109,7 @@ export default {
         orbit_center_type: 'star',
         orbit_center_code: 'sun',
         initial_thrust: {
-          x: 31.11,
+          x: -31.11,
           y: 15.55,
           z: 2
         }
