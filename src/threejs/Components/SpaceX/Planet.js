@@ -12,6 +12,7 @@ const Planet = ({
   // const x = 0
   // const y = (-1 * data.distance_to_ref) / 10
   // const z = 0
+  mesh.name = data.planet_code
 
   // mesh.position.set(x, y, z)
 
