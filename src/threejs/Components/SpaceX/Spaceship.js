@@ -141,6 +141,9 @@ const Spaceship = ({
         }
         else if (step_type == 'orbit') {
           console.log(step_type)
+
+          // 
+          // START - Initial Orbiting thrust
           if (!is_orbiting) {
             if (cur_fp_step.initial_thrust) {
               speed_vector = [
@@ -149,51 +152,41 @@ const Spaceship = ({
                 cur_fp_step.initial_thrust.z,
               ]
             } else {
-              // speed_vector = [-1.11, 5.55, 2.01]
               speed_vector = [-1.11, 5.55, 3.01]
-
             }
-            // console.log(cur_fp_step)
             is_orbiting = true
           }
+          // END - Initial Orbiting thrust
+          // 
+          // 
+          // 
+          //           
+          // START - Apply Sun gravitationnal pull
+          // 
+          // Get pull vector
           var dx = 0 - mesh.position.x;
           var dy = 0 - mesh.position.y;
           var dz = 0 - mesh.position.z;
+          // Get pull force
           var distance_to_sun = Math.sqrt(dx * dx + dy * dy + dz * dz);
           var mass_spacecraft = 10
           var mass_sun = 1.9884 * Math.pow(10, 5)
           var gravity_pull_force = (mass_sun / (distance_to_sun * 1000000))
-          // console.log("gravity_pull_sun: ", gravity_pull_force, " N")
-          // console.log("mesh.position: ", mesh.position)
+          // Build gravity pull force vector (origin: spaceship)
           var gravity_pull_vector = {
             x: dx * gravity_pull_force,
             y: dy * gravity_pull_force,
             z: dz * gravity_pull_force,
           }
           speed_vector = [
-            speed_vector[0] += (dx * gravity_pull_force),
-            speed_vector[1] += (dy * gravity_pull_force),
-            speed_vector[2] += (dz * gravity_pull_force)
+            speed_vector[0] += gravity_pull_vector.x,
+            speed_vector[1] += gravity_pull_vector.y,
+            speed_vector[2] += gravity_pull_vector.z
           ]
-          // speed_vector = [
-          //   speed_vector[0] += (dy * gravity_pull_force * -0.1),
-          //   speed_vector[1] += (dx * gravity_pull_force * -0.1),
-          //   speed_vector[2]
-          // ]
-          // speed_vector = [
-          //   speed_vector[0] += 0.0092,
-          //   speed_vector[1] += 0.0192,
-          //   speed_vector[2]
-          // ]
-
-
+          // 
+          // 
+          // START - Draw orbit history lines
           if (previous_position) {
-            // console.log("previous_position")
-            // console.log(previous_position)
-            // console.log("mesh.position")
-            // console.log(mesh.position)
-
-
             var material = new LineBasicMaterial({ color: 0xffff00 });
             var geometry = new Geometry();
             // geometry.vertices.push(new Vector3(previous_position.x, previous_position.y, previous_position.z));
@@ -206,10 +199,13 @@ const Spaceship = ({
             // 
           }
           previous_position = mesh.position
+          // END - Draw orbit history lines 
 
 
 
-
+          // 
+          // START - When has reach max distance from fun
+          // When has reached max distance to sun (main center of gravity)
           if (previous_distance_to_sun && previous_distance_to_sun >= distance_to_sun) {
             // console.log("distance_to_sun: ", distance_to_sun * 1000000, " km")
             // console.log("gravity_pull_vector: ", gravity_pull_vector)
@@ -217,6 +213,8 @@ const Spaceship = ({
             // console.log("speed_vector: ", speed_vector)
           }
           previous_distance_to_sun = distance_to_sun
+          // END - When has reach max distance from fun
+          // 
 
         }
       }
@@ -224,41 +222,13 @@ const Spaceship = ({
       // 
     }
 
-
-
-    // 
-    var current_position = [mesh.position.x, mesh.position.y, mesh.position.z]
-    // Target direction
-    // console.log("target_position")
-    // console.log(target_position)
-    // console.log("current_position")
-    // console.log(current_position)
-    // 
-
-
-    // 
-    // 
-    // Movement calculation method 1 : get path betweeen target position & current position & move to ration
-    // var new_position = [
-    //   mesh.position.x + target_vector[0] * speed_vector[0],
-    //   mesh.position.y + target_vector[1] * speed_vector[1],
-    //   mesh.position.z + target_vector[2] * speed_vector[2]
-    // ]
-
-    // 
-    // 
-    // 
-    var new_position = [
-      speed_vector[0] + current_position[0],
-      speed_vector[1] + current_position[1],
-      speed_vector[2] + current_position[2]
-    ]
     // 
     // Update ship position
-    mesh.position.x = (new_position[0])
-    mesh.position.y = (new_position[1])
-    mesh.position.z = (new_position[2])
+    mesh.position.x += speed_vector[0]
+    mesh.position.y += speed_vector[1]
+    mesh.position.z += speed_vector[2]
     // 
+    // Update local tick time
     local_time = local_time + 1
     // 
   }
