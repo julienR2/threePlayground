@@ -81,16 +81,12 @@ const Spaceship = ({
   const update = () => {
 
     if (spaceshipInformation.flight_plan[flight_plan_current_step]) {
+      // Local var for easier access // console.log(cur_fp_step)
       var cur_fp_step = spaceshipInformation.flight_plan[flight_plan_current_step]
-      // console.log(cur_fp_step)
       // 
       if (spaceshipInformation.flight_plan[flight_plan_current_step]) {
-        var step_duration = spaceshipInformation.flight_plan[flight_plan_current_step].datetime_start
         var step_type = spaceshipInformation.flight_plan[flight_plan_current_step].type
-        // console.log(local_time)
-        // console.log(step_type)
-        // console.log(min_start_datetime)
-        // if (local_time >= min_start_datetime && local_time <= min_start_datetime + step_duration) {
+        // console.log(local_time, step_type, min_start_datetime)
         if (step_type === 'takeoff') {
           var min_start_datetime = spaceshipInformation.flight_plan[flight_plan_current_step].datetime_start
           if (local_time === min_start_datetime) {
@@ -103,45 +99,44 @@ const Spaceship = ({
           }
         }
         else if (step_type === 'rendezvous') {
+          // START - If has not started rendez-vous manoeuver
           if (target_vector === null) {
-            // Target object
+            // Get Rendez-vous locations
             var obj = world.scene.getObjectByName(cur_fp_step.rendezVous.target_object_code); // 
             target_position = [obj.position.x, obj.position.y, obj.position.z + 2]
-            // if (local_time === min_start_datetime) {
-            // Target vector
-            target_position = [obj.position.x, obj.position.y, obj.position.z + 2]
+            // Calculate target vector to get there
             target_vector = [
               target_position[0] - mesh.position.x,
               target_position[1] - mesh.position.y,
               target_position[2] - mesh.position.z
             ]
+            // Apply thrust to get there
             speed_vector = [
               target_vector[0] * 0.01,
               target_vector[1] * 0.01,
               target_vector[2] * 0.01
             ]
-            // }
+            // END - If has not started rendez-vous manoeuver
           }
+
+          // START - If is on its ways
           else {
             // check if has arrived
-            // console.log(target_position)
-            // console.log(mesh.position)
             if (
               (Math.pow(target_position[0], 2) - Math.pow(mesh.position.x, 2) < 2) &&
               (Math.pow(target_position[1], 2) - Math.pow(mesh.position.y, 2) < 2) &&
               (Math.pow(target_position[2], 2) - Math.pow(mesh.position.z, 2) < 2)
             ) {
-              // 
-              // Stop, reset target & go to next step
+              // Stop & go to next step
               speed_vector = [0, 0, 0]
               target_vector = null
               flight_plan_current_step += 1
             }
           }
-        }
-        else if (step_type == 'orbit') {
-          console.log(step_type)
+          // END - If is on its ways
 
+        }
+        else if (step_type === 'orbit') {
           // 
           // START - Initial Orbiting thrust
           if (!is_orbiting) {
@@ -159,10 +154,7 @@ const Spaceship = ({
           // END - Initial Orbiting thrust
           // 
           // 
-          // 
-          //           
           // START - Apply Sun gravitationnal pull
-          // 
           // Get pull vector
           var dx = 0 - mesh.position.x;
           var dy = 0 - mesh.position.y;
@@ -178,11 +170,13 @@ const Spaceship = ({
             y: dy * gravity_pull_force,
             z: dz * gravity_pull_force,
           }
+          // Apply gravity pull to speed vector
           speed_vector = [
             speed_vector[0] += gravity_pull_vector.x,
             speed_vector[1] += gravity_pull_vector.y,
             speed_vector[2] += gravity_pull_vector.z
           ]
+          // END - Apply Sun gravitationnal pull
           // 
           // 
           // START - Draw orbit history lines
