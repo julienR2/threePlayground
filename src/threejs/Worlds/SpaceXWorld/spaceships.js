@@ -9,31 +9,25 @@ export default {
     spaceship_code: 'elgringo',
     active: true,
     takeoff_location: {
-      x: 0,
-      y: -615,
-      z: 325,
+      location_code: "earth",
     },
+    // takeoff_location: {
+    //   x: 0,
+    //   y: -615,
+    //   z: 325,
+    // },
     flight_plan: [
       {
         type: "takeoff",
-        datetime_start: 120,
-        planned_duration: '60', // seconds
-
-      },
-      {
-        type: "rendezvous",
-        rendezVous: {
-          name: 'Earth intercept on 1 feb 2020',
-          target_object_code: 'earth'
-        },
+        datetime_start: 65,
       },
       {
         type: "orbit",
         orbit_center_type: 'star',
         orbit_center_code: 'sun',
         initial_thrust: {
-          x: -1.11,
-          y: 5.55,
+          x: -0.951,
+          y: 0.95,
           z: 0
         }
       },
@@ -59,25 +53,17 @@ export default {
           name: 'Mars intercept',
           target_object_code: 'mars'
         },
-
-      },
-      {
-        type: "rendezvous",
-        // planne_datetime_start: '01/01/2020:22:23:00:00',
-        rendezVous: {
-          name: 'Earth intercept',
-          target_object_code: 'earth'
-
-        }
       },
       {
         type: "orbit",
         orbit_center_type: 'star',
         orbit_center_code: 'sun',
         initial_thrust: {
-          x: -1.11,
-          y: 5.55,
-          z: 2
+          // x: -0.651,
+          // y: 1.75295,
+          x: -1.1,
+          y: -2.61,
+          z: 1.1
         }
       },
 
@@ -94,13 +80,13 @@ export default {
     flight_plan: [
       {
         type: "takeoff",
-        datetime_start: 200,
+        datetime_start: 400,
       },
       {
         type: "rendezvous",
         rendezVous: {
-          name: 'Mars intercept',
-          target_object_code: 'mars'
+          name: 'Earth intercept',
+          target_object_code: 'earth'
         },
 
       },
@@ -109,8 +95,8 @@ export default {
         orbit_center_type: 'star',
         orbit_center_code: 'sun',
         initial_thrust: {
-          x: -31.11,
-          y: 15.55,
+          x: -3.11,
+          y: 1.55,
           z: 2
         }
       },
@@ -123,29 +109,23 @@ export default {
     flight_plan: [
       {
         type: "takeoff",
-        datetime_start: 200,
-
+        datetime_start: 100,
       },
       {
         type: "rendezvous",
-        // planne_datetime_start: '01/01/2020:22:23:00:00',
-        datetime_start: 400,
-        planned_duration: '600', // seconds
-        start_engine: false,
         rendezVous: {
-          name: 'Earth intercept on 1 feb 2020',
-          target_object_code: 'mars'
+          name: 'Earth intercept',
+          target_object_code: 'earth'
         },
-
       },
       {
         type: "orbit",
         orbit_center_type: 'star',
         orbit_center_code: 'sun',
         initial_thrust: {
-          x: -7.11,
-          y: 17.55,
-          z: 0
+          x: -1.2951,
+          y: 0.95,
+          z: -2
         }
       },
 
@@ -171,7 +151,12 @@ export default {
       {
         type: "orbit",
         orbit_center_type: 'star',
-        orbit_center_code: 'sun'
+        orbit_center_code: 'sun',
+        initial_thrust: {
+          x: -1.2951,
+          y: 0.95,
+          z: -2
+        }
       },
 
     ]
@@ -204,7 +189,12 @@ export default {
       {
         type: "orbit",
         orbit_center_type: 'star',
-        orbit_center_code: 'sun'
+        orbit_center_code: 'sun',
+        initial_thrust: {
+          x: -1.2951,
+          y: 0.95,
+          z: -2
+        }
       },
 
     ]
