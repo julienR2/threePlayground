@@ -84,13 +84,12 @@ export default {
     ]
   },
   voyager_two: {
-    active: false,
+    active: true,
     spaceship_code: 'voyager_two',
     takeoff_location: {
-      x: -0,
-      y: -600,
-      z: 300,
-      // 0, -655, 350
+      x: 0,
+      y: -755,
+      z: 355,
     },
     flight_plan: [
       {
@@ -100,15 +99,7 @@ export default {
       {
         type: "rendezvous",
         rendezVous: {
-          name: 'Earth intercept on 1 feb 2020',
-          target_object_code: 'earth'
-
-        }
-      },
-      {
-        type: "rendezvous",
-        rendezVous: {
-          name: 'Earth intercept on 1 feb 2020',
+          name: 'Mars intercept',
           target_object_code: 'mars'
         },
 
@@ -118,8 +109,8 @@ export default {
         orbit_center_type: 'star',
         orbit_center_code: 'sun',
         initial_thrust: {
-          x: -1.11,
-          y: -5.55,
+          x: 31.11,
+          y: 15.55,
           z: 2
         }
       },
