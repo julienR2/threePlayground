@@ -80,6 +80,9 @@ Trajectory corrections
 - https://code.nasa.gov/#/
 - https://ti.arc.nasa.gov/opensource/projects/mission-simulation-toolkit/
 
+## Other ressources: 
+- https://nasa3d.arc.nasa.gov/models
+
 ## Examples
 - https://eyes.jpl.nasa.gov/eyes-on-the-solar-system.html
 - http://jeromeetienne.github.io/flying-spaceship-minigame/slides/#29
