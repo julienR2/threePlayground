@@ -11,11 +11,6 @@ export default {
     takeoff_location: {
       location_code: "earth",
     },
-    // takeoff_location: {
-    //   x: 0,
-    //   y: -615,
-    //   z: 325,
-    // },
     flight_plan: [
       {
         type: "takeoff",
@@ -70,7 +65,7 @@ export default {
     ]
   },
   voyager_two: {
-    active: true,
+    active: false,
     spaceship_code: 'voyager_two',
     takeoff_location: {
       x: 0,
@@ -95,108 +90,12 @@ export default {
         orbit_center_type: 'star',
         orbit_center_code: 'sun',
         initial_thrust: {
-          x: -3.11,
-          y: 1.55,
-          z: 2
+          x: 3.11,
+          y: -2.55,
+          z: 1.2
         }
       },
 
     ]
   },
-  voyager_three: {
-    active: false,
-    spaceship_code: 'voyager_three',
-    flight_plan: [
-      {
-        type: "takeoff",
-        datetime_start: 100,
-      },
-      {
-        type: "rendezvous",
-        rendezVous: {
-          name: 'Earth intercept',
-          target_object_code: 'earth'
-        },
-      },
-      {
-        type: "orbit",
-        orbit_center_type: 'star',
-        orbit_center_code: 'sun',
-        initial_thrust: {
-          x: -1.2951,
-          y: 0.95,
-          z: -2
-        }
-      },
-
-    ]
-  },
-  voyager_four: {
-    active: false,
-    spaceship_code: 'voyager_four',
-    flight_plan: [
-      {
-        type: "takeoff",
-        datetime_start: 0,
-
-      },
-      {
-        type: "rendezvous",
-        rendezVous: {
-          name: 'Earth intercept on 1 feb 2020',
-          target_object_code: 'jupiter'
-        },
-
-      },
-      {
-        type: "orbit",
-        orbit_center_type: 'star',
-        orbit_center_code: 'sun',
-        initial_thrust: {
-          x: -1.2951,
-          y: 0.95,
-          z: -2
-        }
-      },
-
-    ]
-  },
-  voyager_five: {
-    active: false,
-    spaceship_code: 'voyager_five',
-    flight_plan: [
-      {
-        type: "takeoff",
-        datetime_start: 1000,
-
-      },
-      {
-        type: "rendezvous",
-        rendezVous: {
-          name: 'Earth intercept on 1 feb 2020',
-          target_object_code: 'earth'
-        },
-
-      },
-      {
-        type: "rendezvous",
-        rendezVous: {
-          name: 'Earth intercept on 1 feb 2020',
-          target_object_code: 'neptune'
-        },
-
-      },
-      {
-        type: "orbit",
-        orbit_center_type: 'star',
-        orbit_center_code: 'sun',
-        initial_thrust: {
-          x: -1.2951,
-          y: 0.95,
-          z: -2
-        }
-      },
-
-    ]
-  }
 }
