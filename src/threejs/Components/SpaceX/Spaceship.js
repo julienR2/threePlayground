@@ -265,12 +265,15 @@ const Spaceship = ({
   }
   document.addEventListener('keydown', onDocumentKeyPress, false);
   function onDocumentKeyPress(e) {
-    var keynum = e.which;
+    var charcode = e.which;
+    var keynum = String.fromCharCode(charcode)
+    // console.log(keynum)
+    // console.log(keynum === 'O')
     // alert(String.fromCharCode(keynum));
-    if (keynum === 'o') { thrust_order.y = 0.1 }
-    else if (keynum === 'l') { thrust_order.y = -0.1 }
-    else if (keynum === 'm') { thrust_order.x = 0.1 }
-    else if (keynum === 'k') { thrust_order.x = -0.1 }
+    if (keynum === 'O') { console.log("UP"); thrust_order.y = 0.1 }
+    else if (keynum === 'L') { console.log("DOWN"); thrust_order.y = -0.1 }
+    else if (keynum === 'M') { console.log("RIGHT"); thrust_order.x = 0.1 }
+    else if (keynum === 'K') { console.log("LEFT"); thrust_order.x = -0.1 }
   }
   // END - Spaceship controls
 
