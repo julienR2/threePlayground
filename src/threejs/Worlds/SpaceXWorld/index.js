@@ -51,7 +51,10 @@ const OrbitWorld = container => {
 
   world.onUpdate(delta => {
     // 
-    // Track object on camera
+    // 
+    // 
+    // 
+    // START - Camera object tracking
     var camera_target = world.scene.getObjectByName(object_tracking_name);
     // If an object is selected for tracking :
     if (camera_target) {
@@ -64,8 +67,9 @@ const OrbitWorld = container => {
       var from_cam_pos_Z = camera_target.position.z + (distance_behind * depth_ratio)
       world.camera.position.set(cam_pos_x, from_cam_pos_y, from_cam_pos_Z)
       world.camera.lookAt(camera_target.position)
+
     }
-    // End camera tracking code segment
+    // END - Camera object tracking
 
   })
 

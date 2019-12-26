@@ -47,42 +47,7 @@ const Spaceship = ({
   mesh.name = spaceshipInformation.spaceship_code;
   // 
   // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // var textGeo, textMesh1, materials
-  // // 
-  // // 
-  // // 
-  // var loader = new FontLoader();
-  // var textGeometry
-  // loader.load('fonts/helvetiker_regular.typeface.json', function (font) {
-
-  //   textGeometry = new TextGeometry('Hello three.js!', {
-  //     font: font,
-  //     size: 8,
-  //     height: 1,
-  //     curveSegments: 12,
-  //     bevelEnabled: true,
-  //     bevelThickness: 10,
-  //     bevelSize: 8,
-  //     bevelOffset: 0,
-  //     bevelSegments: 5
-  //   })
-  // })
-  // mesh.add(textGeometry);
-  // var textGeo = new BufferGeometry().fromGeometry(textGeometry);
-  // var textMesh1 = new Mesh(textGeo, materials);
-
-
-
-
-
+  // START - Add text information to spaceship
   function makeTextSprite(message, parameters) {
     if (parameters === undefined) parameters = {};
 
@@ -170,58 +135,11 @@ const Spaceship = ({
 
   mesh.add(spaceshipInformationText);
   // 
+  // END - Add text information to spaceship
   // 
   // 
   // 
   // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-  // 
-
 
   // Set initial spaceship position
   const default_x = 0
