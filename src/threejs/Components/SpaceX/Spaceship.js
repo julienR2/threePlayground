@@ -189,9 +189,9 @@ const Spaceship = ({
     // console.log(keynum === 'O')
     // alert(String.fromCharCode(keynum));
     if (keynum === 'O') { console.log("UP"); thrust_order.y = 0.1 }
-    else if (keynum === 'L') { console.log("DOWN"); thrust_order.y = -0.1 }
-    else if (keynum === 'M') { console.log("RIGHT"); thrust_order.x = 0.1 }
-    else if (keynum === 'K') { console.log("LEFT"); thrust_order.x = -0.1 }
+    else if (keynum === 'L') { console.log("DOWN"); thrust_order.y = -0.05 }
+    else if (keynum === 'M') { console.log("RIGHT"); thrust_order.x = 0.05 }
+    else if (keynum === 'K') { console.log("LEFT"); thrust_order.x = -0.05 }
   }
   // END - Spaceship controls
 

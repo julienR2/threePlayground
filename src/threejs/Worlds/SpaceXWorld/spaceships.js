@@ -92,7 +92,7 @@ export default {
     ]
   },
   simpelito: {
-    spaceship_code: 'simpelito',
+    spaceship_code: 'explorer',
     active: true,
     controls: true,
     takeoff_location: {
@@ -101,33 +101,17 @@ export default {
     flight_plan: [
       {
         type: "takeoff",
-        datetime_start: 100,
-        duration: 10,
+        datetime_start: 300,
+        duration: 0,
       },
-      {
-        type: "thrust",
-        thrust_force: 0.5,
-      },
-      {
-        type: "thrust",
-        thrust_force: 0.4075,
-      },
-      {
-        type: "wait",
-        duration: 150,
-      },
-      {
-        type: "thrust",
-        thrust_force: 0.39,
-      },
-      {
-        type: "thrust",
-        thrust_force: 0.8,
-      },
-      {
-        type: "thrust",
-        thrust_force: 0.9,
-      },
+      // {
+      //   type: "thrust",
+      //   thrust_force: 0.15,
+      // },
+      // {
+      //   type: "thrust",
+      //   thrust_force: 0.25,
+      // },
     ]
   },
   voyager_one: {
@@ -139,7 +123,7 @@ export default {
     flight_plan: [
       {
         type: "takeoff",
-        datetime_start: 0,
+        datetime_start: 365,
         duration: 0,
       },
       {
@@ -147,30 +131,11 @@ export default {
         orbit_time: 40,
         orbit_center_type: 'star',
         orbit_center_code: 'sun',
-        initial_thrust: {
-          x: -0.21,
-          y: 0.65,
-          z: 0
-        }
-      },
-      {
-        type: "rendezvous",
-        rendezVous: {
-          name: 'Venus intercept',
-          target_object_code: 'venus'
-        },
-      },
-      {
-        type: "orbit",
-        orbit_center_type: 'star',
-        orbit_center_code: 'sun',
-        initial_thrust: {
-          // x: -0.651,
-          // y: 1.75295,
-          x: -1.1,
-          y: -2.61,
-          z: 1.1
-        }
+        // initial_thrust: {
+        //   x: -0.21,
+        //   y: 0.65,
+        //   z: 0
+        // }
       },
 
     ]
