@@ -7,7 +7,17 @@ import {
   Geometry,
   Vector3,
   Line,
-  Group
+  Group,
+  // TextBufferGeometry, 
+  Texture,
+  SpriteMaterial,
+  Sprite,
+  // SpriteAlignment,
+  // 
+  FontLoader,
+  TextGeometry,
+  BufferGeometry,
+  MeshPhongMaterial
 } from 'three'
 
 const Spaceship = ({
@@ -27,11 +37,202 @@ const Spaceship = ({
   var material = new MeshBasicMaterial({ color: 0xffff00 });
   var spaceship_mesh = new Mesh(geometry, material);
   // Name object in scene
+
+
+
+
+
+
+
+  // Create group & add items
   var mesh = new Group();
   mesh.add(spaceship_mesh);
   mesh.add(spaceshipTracker);
-
+  // 
   mesh.name = spaceshipInformation.spaceship_code;
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // var textGeo, textMesh1, materials
+  // // 
+  // // 
+  // // 
+  // var loader = new FontLoader();
+  // var textGeometry
+  // loader.load('fonts/helvetiker_regular.typeface.json', function (font) {
+
+  //   textGeometry = new TextGeometry('Hello three.js!', {
+  //     font: font,
+  //     size: 8,
+  //     height: 1,
+  //     curveSegments: 12,
+  //     bevelEnabled: true,
+  //     bevelThickness: 10,
+  //     bevelSize: 8,
+  //     bevelOffset: 0,
+  //     bevelSegments: 5
+  //   })
+  // })
+  // mesh.add(textGeometry);
+  // var textGeo = new BufferGeometry().fromGeometry(textGeometry);
+  // var textMesh1 = new Mesh(textGeo, materials);
+
+
+
+
+
+  function makeTextSprite(message, parameters) {
+    if (parameters === undefined) parameters = {};
+
+    var fontface = parameters.hasOwnProperty("fontface") ?
+      parameters["fontface"] : "Arial";
+
+    var fontsize = parameters.hasOwnProperty("fontsize") ?
+      parameters["fontsize"] : 18;
+
+    var borderThickness = parameters.hasOwnProperty("borderThickness") ?
+      parameters["borderThickness"] : 4;
+
+    var borderColor = parameters.hasOwnProperty("borderColor") ?
+      parameters["borderColor"] : { r: 0, g: 0, b: 0, a: 1.0 };
+
+    var backgroundColor = parameters.hasOwnProperty("backgroundColor") ?
+      parameters["backgroundColor"] : { r: 255, g: 255, b: 255, a: 1.0 };
+
+    // var spriteAlignment = SpriteAlignment.topLeft;
+    var spriteAlignment = 0;
+
+    var canvas = document.createElement('canvas');
+    var context = canvas.getContext('2d');
+    context.font = "Bold " + fontsize + "px " + fontface;
+
+    // get size data (height depends only on font size)
+    var metrics = context.measureText(message);
+    var textWidth = metrics.width;
+
+    // background color
+    context.fillStyle = "rgba(" + backgroundColor.r + "," + backgroundColor.g + ","
+      + backgroundColor.b + "," + backgroundColor.a + ")";
+    // border color
+    context.strokeStyle = "rgba(" + borderColor.r + "," + borderColor.g + ","
+      + borderColor.b + "," + borderColor.a + ")";
+
+    context.lineWidth = borderThickness;
+    roundRect(context, borderThickness / 2, borderThickness / 2, textWidth + borderThickness, fontsize * 1.4 + borderThickness, 6);
+    // 1.4 is extra height factor for text below baseline: g,j,p,q.
+
+    // text color
+    context.fillStyle = "rgba(0, 0, 0, 1.0)";
+
+    context.fillText(message, borderThickness, fontsize + borderThickness);
+
+    // canvas contents will be used for a texture
+    var texture = new Texture(canvas)
+    texture.needsUpdate = true;
+
+    var spriteMaterial = new SpriteMaterial(
+      { map: texture, useScreenCoordinates: false, alignment: spriteAlignment });
+    var sprite = new Sprite(spriteMaterial);
+    sprite.scale.set(100, 50, 1.0);
+    return sprite;
+  }
+
+  // function for drawing rounded rectangles
+  function roundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+  }
+
+
+
+
+  var spritey = makeTextSprite(spaceshipInformation.spaceship_code,
+    {
+      fontsize: 24,
+      borderThickness: 1,
+      borderColor: { r: 255, g: 0, b: 0, a: 1.0 },
+      backgroundColor: { r: 100, g: 100, b: 100, a: 0.8 }
+    });
+  spritey.position.set(0, 0, 0);
+  // world.scene.add(spritey);
+
+  // var spritey = makeTextSprite(" World! ",
+  //   { fontsize: 32, fontface: "Georgia", borderColor: { r: 0, g: 0, b: 255, a: 1.0 } });
+  // spritey.position.set(55, 105, 55);
+  // world.scene.add(spritey);
+
+
+  mesh.add(spritey);
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
+  // 
 
 
   // Set initial spaceship position
@@ -64,6 +265,18 @@ const Spaceship = ({
     0.0,
     0.0,
   ]
+
+  // 
+  // 
+  // 
+  // Spaceship controls
+  // document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+  // document.addEventListener( 'touchstart', onDocumentTouchStart, false );
+  // document.addEventListener( 'touchmove', onDocumentTouchMove, false );
+  // document.addEventListener( 'keypress', onDocumentKeyPress, false );
+  // document.addEventListener( 'keydown', onDocumentKeyDown, false );
+
+
 
 
   const update = () => {
