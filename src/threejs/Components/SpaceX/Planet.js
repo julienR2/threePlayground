@@ -16,7 +16,7 @@ const Planet = ({
 
   // mesh.position.set(x, y, z)
 
-  const rotation = (2 * Math.PI) / (data.orbit_revolution * 3)
+  const rotation = (2 * Math.PI) / (data.orbit_revolution)
 
   let theta = 0
 

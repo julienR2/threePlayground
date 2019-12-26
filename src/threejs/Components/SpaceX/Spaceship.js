@@ -1,11 +1,13 @@
-import Sphere from '../Sphere'
-import Cube from '../Cube'
+// import Sphere from '../Sphere'
+// import Cube from '../Cube'
 import {
-  BoxBufferGeometry, MeshBasicMaterial, MeshStandardMaterial,
+  BoxBufferGeometry, MeshBasicMaterial,
+  SphereGeometry,
   Mesh, LineBasicMaterial,
   Geometry,
   Vector3,
-  Line
+  Line,
+  Group
 } from 'three'
 
 const Spaceship = ({
@@ -17,60 +19,66 @@ const Spaceship = ({
   // var geometry = new THREE.BoxGeometry(1, 1, 1);
   // var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
   // var cube = new THREE.Mesh(geometry, material);
+  var sphereGeom = new SphereGeometry(5, 25, 25);
+  var blueMaterial = new MeshBasicMaterial({ color: 0xFFFAFA, transparent: true, opacity: 0.1 });
+  var spaceshipTracker = new Mesh(sphereGeom, blueMaterial);
 
-
-  var geometry = new BoxBufferGeometry(1, 1, 1);
+  var geometry = new BoxBufferGeometry(0.5, 1, 1);
   var material = new MeshBasicMaterial({ color: 0xffff00 });
-  var mesh = new Mesh(geometry, material);
+  var spaceship_mesh = new Mesh(geometry, material);
   // Name object in scene
+  var mesh = new Group();
+  mesh.add(spaceship_mesh);
+  mesh.add(spaceshipTracker);
+
   mesh.name = spaceshipInformation.spaceship_code;
 
-  // const mesh = Sphere({ geometry, material, radius })
-  // const mesh = Cube({ sideSize: 1.5, LengthArrow: 0.5, HeightArrow: 0.7 })
-  // 
 
-  // const rotation = (2 * Math.PI) / (data.orbit_revolution * 3)
+  // Set initial spaceship position
+  const default_x = 0
+  const default_y = -400 // -455
+  const default_z = 125 // 150
+  mesh.position.set(default_x, default_y, default_z)
+
+
+
   // 
+  // let theta = 0
+  var orbit_end_time
+  // earth position on 1sf of jan
+
+
+  var target_position, is_orbiting, previous_position
+  var target_vector = null
+  // var previous_distance_to_sun
+  var local_time = 0;
+
+  var mass_spacecraft = 10
+  var mass_sun = 1.9884 * Math.pow(10, 5) * 3
+
   // 
+  var flight_plan_current_step = 0
   // g=9.8 m/s^2
   var speed_vector = [
     0.0,
     0.0,
     0.0,
   ]
-  // console.log(spaceshipInformation)
-  if (spaceshipInformation.takeoff_location.x) {
-    mesh.position.set(
-      spaceshipInformation.takeoff_location.x,
-      spaceshipInformation.takeoff_location.y,
-      spaceshipInformation.takeoff_location.z
-    )
-  } else {
-    const default_x = 0
-    const default_y = -400 // -455
-    const default_z = 125 // 150
-    mesh.position.set(default_x, default_y, default_z)
-
-  }
-
-  // 
-  // let theta = 0
-  var local_time = 0;
-
-  // earth position on 1sf of jan
-
-  var flight_plan_current_step = 0
-  var target_vector = null
-
-
-  var target_position, is_orbiting, previous_distance_to_sun, previous_position
-
-
-
 
 
   const update = () => {
+    // 
+    // 
+    // 
 
+
+    // 
+    // console.log("local_time")
+    // console.log(local_time)
+    // 
+    // 
+    // 
+    // 
     if (spaceshipInformation.flight_plan[flight_plan_current_step]) {
       // Local var for easier access // console.log(cur_fp_step)
       var cur_fp_step = spaceshipInformation.flight_plan[flight_plan_current_step]
@@ -79,20 +87,55 @@ const Spaceship = ({
         var step_type = spaceshipInformation.flight_plan[flight_plan_current_step].type
         // console.log(local_time, step_type, min_start_datetime)
         if (step_type === 'takeoff') {
-
           // Set spaceship takeoff location
           if (spaceshipInformation.takeoff_location.location_code) {
             var target_takeoff_location = world.scene.getObjectByName(spaceshipInformation.takeoff_location.location_code);
-
             mesh.position.set(target_takeoff_location.position.x, target_takeoff_location.position.y, target_takeoff_location.position.z + 1.25)
           }
-
+          // Set takeoff relative date time 
           var min_start_datetime = spaceshipInformation.flight_plan[flight_plan_current_step].datetime_start
+          var min_end_datetime = spaceshipInformation.flight_plan[flight_plan_current_step].datetime_start + spaceshipInformation.flight_plan[flight_plan_current_step].duration
+          // 
+          // Sun speed of object before take off (get planet speed inertia around sun)
+          // console.log(previous_position)
+          // console.log(mesh.position.x)
+
+          // 
+          // 
+          // 
           if (local_time === min_start_datetime) {
+            if (previous_position) {
+              var inertia_vector = {
+                x: mesh.position.x - previous_position.x,
+                y: mesh.position.y - previous_position.y,
+                z: mesh.position.z - previous_position.z
+              }
+              speed_vector = [
+                inertia_vector.x,
+                inertia_vector.y,
+                inertia_vector.z
+              ]
+            }
+          }
+          if (local_time > min_start_datetime) {
+            // 
+            // If sent from planet
+            // if (target_takeoff_location) {
+            //   var vertical_thrust_vector = {
+            //     x: mesh.position.x - target_takeoff_location.position.x,
+            //     y: mesh.position.y - target_takeoff_location.position.y,
+            //     z: mesh.position.z - target_takeoff_location.position.z
+            //   }
+            //   speed_vector = [
+            //     speed_vector[0] += vertical_thrust_vector.x * 0.1,
+            //     speed_vector[1] += vertical_thrust_vector.y * 0.1,
+            //     speed_vector[2] += vertical_thrust_vector.z * 0.001
+            //   ]
+            // }
 
-
-
-
+            // Go to next step after take off
+          }
+          if (local_time >= min_end_datetime) {
             flight_plan_current_step += 1
           }
         }
@@ -110,9 +153,9 @@ const Spaceship = ({
             ]
             // Apply thrust to get there
             speed_vector = [
-              target_vector[0] * 0.01,
-              target_vector[1] * 0.01,
-              target_vector[2] * 0.01
+              speed_vector[0] += target_vector[0] * 0.001,
+              speed_vector[1] += target_vector[1] * 0.001,
+              speed_vector[2] += target_vector[2] * 0.001
             ]
             // END - If has not started rendez-vous manoeuver
           }
@@ -134,10 +177,119 @@ const Spaceship = ({
           // END - If is on its ways
 
         }
+        else if (step_type === 'geosync') {
+
+          var target_obj = world.scene.getObjectByName(cur_fp_step.target_object_code); // 
+          target_position = [target_obj.position.x, target_obj.position.y, target_obj.position.z + 2]
+          // Calculate target vector to get there
+          target_vector = [
+            target_position[0] - mesh.position.x,
+            target_position[1] - mesh.position.y,
+            target_position[2] - mesh.position.z
+          ]
+          // Apply thrust to get there
+          speed_vector = [
+            speed_vector[0] += target_vector[0] * 0.00001,
+            speed_vector[1] += target_vector[1] * 0.00001,
+            speed_vector[2] += target_vector[2] * 0.00001
+          ]
+          // END - If has not started rendez-vous manoeuver
+
+
+
+
+        }
+        else if (step_type === 'thrust') {
+
+
+
+
+          var dist_sun = Math.sqrt(
+            Math.pow(
+              mesh.position.x - 0
+              , 2)
+            + Math.pow(
+              mesh.position.y - 0
+              , 2)
+            + Math.pow(
+              mesh.position.z - 0
+              , 2)
+          );
+
+          var dist_sun_next_step = Math.sqrt(
+            Math.pow(
+              mesh.position.x + speed_vector[0] - 0
+              , 2)
+            + Math.pow(
+              mesh.position.y + speed_vector[1] - 0
+              , 2)
+            + Math.pow(
+              mesh.position.z + speed_vector[2] - 0
+              , 2)
+          );
+
+          var dist_next_step = Math.sqrt(
+            Math.pow(
+              mesh.position.x + speed_vector[0] - mesh.position.x
+              , 2)
+            + Math.pow(
+              mesh.position.y + speed_vector[1] - mesh.position.y
+              , 2)
+            + Math.pow(
+              mesh.position.z + speed_vector[2] - mesh.position.z
+              , 2)
+          );
+
+          var hypo_square = Math.pow(dist_sun_next_step, 2)
+          var sum_squared_sides = Math.pow(dist_sun, 2) + Math.pow(dist_next_step, 2)
+
+          // 
+          var dif = hypo_square - sum_squared_sides
+          if (dif > -2 && dif < 2) {
+            // 
+            console.log(dist_sun)
+            console.log(dist_sun_next_step)
+            console.log(dist_next_step)
+            console.log("hypo_square: ", hypo_square)
+            console.log("sum_squared_sides: ", sum_squared_sides)
+            console.log("dif: ", hypo_square - sum_squared_sides)
+            var thrust_power = cur_fp_step.thrust_force || 0.15
+            speed_vector = [
+              speed_vector[0] += speed_vector[0] * thrust_power,
+              speed_vector[1] += speed_vector[1] * thrust_power,
+              speed_vector[2] += speed_vector[2] * thrust_power
+            ]
+
+            flight_plan_current_step += 1
+          }
+          // 
+          // console.log(mesh.position.x)
+          // console.log(mesh.position.x + speed_vector[0])
+
+
+          console.log("thrust")
+
+
+
+        }
+        else if (step_type === 'wait') {
+          // console.log("wait until: ", orbit_end_time, " - ", local_time)
+          if (!orbit_end_time)
+            orbit_end_time = local_time + cur_fp_step.duration
+
+          if (orbit_end_time && orbit_end_time <= local_time) {
+            orbit_end_time = null
+            flight_plan_current_step += 1
+          }
+        }
         else if (step_type === 'orbit') {
+
           // 
           // START - Initial Orbiting thrust
           if (!is_orbiting) {
+
+
+            // orbit_end_time = local_time + cur_fp_step.orbit_time
             if (cur_fp_step.initial_thrust) {
               speed_vector = [
                 speed_vector[0] += cur_fp_step.initial_thrust.x,
@@ -147,46 +299,43 @@ const Spaceship = ({
             }
             is_orbiting = true
           }
+          flight_plan_current_step += 1
           // END - Initial Orbiting thrust
           // 
           // 
-          // 
 
 
 
-          // 
-          // START - When has reach max distance from fun
-          // When has reached max distance to sun (main center of gravity)
-          if (previous_distance_to_sun && previous_distance_to_sun >= distance_to_sun) {
-            // console.log("distance_to_sun: ", distance_to_sun * 1000000, " km")
-            // console.log("gravity_pull_vector: ", gravity_pull_vector)
-          } else {
-            // console.log("speed_vector: ", speed_vector)
-          }
-          previous_distance_to_sun = distance_to_sun
-          // END - When has reach max distance from fun
-          // 
 
         }
       }
       // 
       // 
+    } else {
+      // mesh.material.color.setHex(0xffffff)
+      // mesh.material.color.setHex(0x00FFFF)
+
     }
     // 
-    var inertia_vector = [0, 0, 0]
     // 
-    if (previous_position) {
-      inertia_vector = [
-        mesh.position.x - previous_position.x,
-        mesh.position.y - previous_position.y,
-        mesh.position.z - previous_position.z
-      ]
-    }
-    speed_vector = [
-      speed_vector[0] += inertia_vector[0],
-      speed_vector[1] += inertia_vector[1],
-      speed_vector[2] += inertia_vector[2]
-    ]
+    // 
+    // 
+    // 
+    // 
+    // var inertia_vector = [0, 0, 0]
+    // 
+    // if (previous_position) {
+    //   inertia_vector = [
+    //     mesh.position.x - previous_position.x,
+    //     mesh.position.y - previous_position.y,
+    //     mesh.position.z - previous_position.z
+    //   ]
+    // }
+    // speed_vector = [
+    //   speed_vector[0] += inertia_vector[0],
+    //   speed_vector[1] += inertia_vector[1],
+    //   speed_vector[2] += inertia_vector[2]
+    // ]
 
     if (step_type !== 'takeoff') {
       // 
@@ -197,8 +346,6 @@ const Spaceship = ({
       var dz = 0 - mesh.position.z;
       // Get pull force
       var distance_to_sun = Math.sqrt(dx * dx + dy * dy + dz * dz);
-      var mass_spacecraft = 10
-      var mass_sun = 1.9884 * Math.pow(10, 5)
       var gravity_pull_force = (
         (mass_sun * mass_spacecraft)
         /
@@ -241,11 +388,19 @@ const Spaceship = ({
     }
     // END - Draw orbit history lines 
     // 
+    // 
+
+    // 
+    // 
+    // 
+    // 
     // UPDATE TICKS
     // Update local tick time
     local_time = local_time + 1
-    previous_position = mesh.position
-    // 
+    var cur_pos_x = mesh.position.x
+    var cur_pos_y = mesh.position.y
+    var cur_pos_z = mesh.position.z
+    previous_position = { x: cur_pos_x, y: cur_pos_y, z: cur_pos_z }    // 
   }
 
   return { mesh, update }
