@@ -12,12 +12,7 @@ import {
   Texture,
   SpriteMaterial,
   Sprite,
-  // SpriteAlignment,
-  // 
-  FontLoader,
-  TextGeometry,
-  BufferGeometry,
-  MeshPhongMaterial
+
 } from 'three'
 
 const Spaceship = ({
@@ -164,23 +159,16 @@ const Spaceship = ({
 
 
 
-  var spritey = makeTextSprite(spaceshipInformation.spaceship_code,
+  var spaceshipInformationText = makeTextSprite(spaceshipInformation.spaceship_code,
     {
       fontsize: 24,
       borderThickness: 1,
       borderColor: { r: 255, g: 0, b: 0, a: 1.0 },
       backgroundColor: { r: 100, g: 100, b: 100, a: 0.8 }
     });
-  spritey.position.set(0, 0, 0);
-  // world.scene.add(spritey);
+  spaceshipInformationText.position.set(0, 0, 0);
 
-  // var spritey = makeTextSprite(" World! ",
-  //   { fontsize: 32, fontface: "Georgia", borderColor: { r: 0, g: 0, b: 255, a: 1.0 } });
-  // spritey.position.set(55, 105, 55);
-  // world.scene.add(spritey);
-
-
-  mesh.add(spritey);
+  mesh.add(spaceshipInformationText);
   // 
   // 
   // 
@@ -269,13 +257,22 @@ const Spaceship = ({
   // 
   // 
   // 
-  // Spaceship controls
-  // document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-  // document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-  // document.addEventListener( 'touchmove', onDocumentTouchMove, false );
-  // document.addEventListener( 'keypress', onDocumentKeyPress, false );
-  // document.addEventListener( 'keydown', onDocumentKeyDown, false );
-
+  // START - Spaceship controls
+  var thrust_order = {
+    x: 0,
+    y: 0,
+    z: 0
+  }
+  document.addEventListener('keydown', onDocumentKeyPress, false);
+  function onDocumentKeyPress(e) {
+    var keynum = e.which;
+    // alert(String.fromCharCode(keynum));
+    if (keynum === 'o') { thrust_order.y = 0.1 }
+    else if (keynum === 'l') { thrust_order.y = -0.1 }
+    else if (keynum === 'm') { thrust_order.x = 0.1 }
+    else if (keynum === 'k') { thrust_order.x = -0.1 }
+  }
+  // END - Spaceship controls
 
 
 
@@ -577,6 +574,13 @@ const Spaceship = ({
         speed_vector[1] += gravity_pull_vector.y,
         speed_vector[2] += gravity_pull_vector.z
       ]
+      // Apply thrust order
+      speed_vector = [
+        speed_vector[0] += thrust_order.x,
+        speed_vector[1] += thrust_order.y,
+        speed_vector[2] += thrust_order.z
+      ]
+      thrust_order = { x: 0, y: 0, z: 0 }
       // END - Apply Sun gravitationnal pull
       // 
     }
