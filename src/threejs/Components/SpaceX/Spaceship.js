@@ -496,12 +496,14 @@ const Spaceship = ({
         speed_vector[2] += gravity_pull_vector.z
       ]
       // Apply thrust order
-      speed_vector = [
-        speed_vector[0] += thrust_order.x,
-        speed_vector[1] += thrust_order.y,
-        speed_vector[2] += thrust_order.z
-      ]
-      thrust_order = { x: 0, y: 0, z: 0 }
+      if (spaceshipInformation.controls) {
+        speed_vector = [
+          speed_vector[0] += thrust_order.x,
+          speed_vector[1] += thrust_order.y,
+          speed_vector[2] += thrust_order.z
+        ]
+        thrust_order = { x: 0, y: 0, z: 0 }
+      }
       // END - Apply Sun gravitationnal pull
       // 
     }

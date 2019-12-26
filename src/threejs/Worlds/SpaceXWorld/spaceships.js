@@ -8,6 +8,7 @@ export default {
   elgringo: {
     spaceship_code: 'elgringo',
     active: true,
+    controls: false,
     takeoff_location: {
       location_code: "earth",
     },
@@ -93,6 +94,7 @@ export default {
   simpelito: {
     spaceship_code: 'simpelito',
     active: true,
+    controls: true,
     takeoff_location: {
       location_code: "earth",
     },
